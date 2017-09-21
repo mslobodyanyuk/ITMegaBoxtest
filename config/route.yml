@@ -1,0 +1,2 @@
+index:  [/, app\Controllers\Controller.indexAction]
+view:   [/view, app\Controllers\Controller.viewAction]
