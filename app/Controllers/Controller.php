@@ -19,11 +19,9 @@ class Controller {
         $databaseParameters = $configParams -> getConfigParameters();
 
         $db = new Price($databaseParameters['host'], $databaseParameters['name'], $databaseParameters['password'], $databaseParameters['database']);
-        $params = $db->getPriceType();
 
-        return $params;
+        return $params = $db->getPriceType();
     }
-
 
     public function viewAction() {
 
@@ -31,9 +29,8 @@ class Controller {
         $databaseParameters = $configParams -> getConfigParameters();
 
         $db = new Price($databaseParameters['host'], $databaseParameters['name'], $databaseParameters['password'], $databaseParameters['database']);
-        $params = $db->getPriceList();
 
-        return $params;
+        return $params = $db->getPriceList();
 	}
 
 }
