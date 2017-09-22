@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Час створення: Вер 18 2017 р., 15:23
+-- Час створення: Вер 22 2017 р., 16:57
 -- Версія сервера: 5.6.25
 -- Версія PHP: 5.6.10
 
@@ -33,14 +33,13 @@ CREATE TABLE IF NOT EXISTS `docprice` (
   `datetime` datetime NOT NULL,
   `price_type` varchar(30) NOT NULL,
   `status` smallint(6) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `docprice`
 --
 
 INSERT INTO `docprice` (`id`, `datetime`, `price_type`, `status`) VALUES
-(1, '2017-09-04 00:00:00', 'закупочная', 0),
 (2, '2017-09-04 00:00:00', 'закупочная', 1),
 (3, '2017-09-05 00:00:00', 'мелкооптовая', 0),
 (4, '2017-09-05 00:00:00', 'мелкооптовая', 1),
@@ -51,7 +50,8 @@ INSERT INTO `docprice` (`id`, `datetime`, `price_type`, `status`) VALUES
 (9, '2017-09-08 00:00:00', 'розничная', 0),
 (10, '2017-09-08 00:00:00', 'розничная', 1),
 (12, '2017-09-15 00:00:00', 'закупочная', 0),
-(13, '2017-09-17 00:00:00', 'закупочная', 0);
+(13, '2017-09-17 00:00:00', 'закупочная', 0),
+(14, '2017-09-18 00:00:00', 'закупочная', 0);
 
 -- --------------------------------------------------------
 
@@ -64,21 +64,21 @@ CREATE TABLE IF NOT EXISTS `docpricebody` (
   `doc_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `price` float NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп даних таблиці `docpricebody`
 --
 
 INSERT INTO `docpricebody` (`id`, `doc_id`, `product_id`, `price`) VALUES
-(1, 1, 1, 2500),
 (2, 2, 2, 12500),
 (3, 3, 5, 5000),
 (4, 4, 6, 3000),
 (13, 5, 9, 2499),
 (14, 6, 10, 13000),
 (15, 12, 1, 2600),
-(16, 13, 1, 2700);
+(16, 13, 1, 2700),
+(17, 14, 1, 2800);
 
 -- --------------------------------------------------------
 
@@ -111,7 +111,7 @@ INSERT INTO `product` (`id`, `title`, `description`, `status`) VALUES
 (11, 'nomi1', 'смартфон', 'нет в наличии'),
 (12, 'hp1', 'ноутбук', 'нет в наличии'),
 (13, 'PHILIPS', 'монитор', 'в наличии'),
-(14, 'PHILIPS1', 'монитор', 'нет наличии');
+(14, 'PHILIPS1', 'монитор', 'нет в наличии');
 
 --
 -- Індекси збережених таблиць
@@ -143,12 +143,12 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT для таблиці `docprice`
 --
 ALTER TABLE `docprice`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT для таблиці `docpricebody`
 --
 ALTER TABLE `docpricebody`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT для таблиці `product`
 --

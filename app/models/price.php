@@ -57,37 +57,24 @@ class Price{
         $date = date('Y-m-d', strtotime($_POST['date']));
 
         $sql =
-            " SELECT  product.id, product.title, product.description, \n".
-            " docprice.datetime, docprice.price_type, docprice.status, \n".
-            " docpricebody.doc_id, docpricebody.product_id, docpricebody.price \n".
-            " FROM \n".
-            " product \n".
-            "  LEFT JOIN ( \n".
+            " SELECT * \n".
+            " FROM product p \n".
+                " LEFT JOIN ( \n".
 
-                        " SELECT docpricebody.product_id \n".
-                        " FROM docpricebody, product, docprice \n".
-                        " WHERE docpricebody.doc_id IN( \n".
-                                    " SELECT dp1.id \n".
-                                    " FROM docprice dp1 \n".
-                                            " INNER JOIN ( \n".
-                                                            " SELECT MAX(docprice.datetime) AS max_date, docprice.price_type, docpricebody.product_id \n".
-                                                            " FROM docprice \n".
-                                                                    " INNER JOIN docpricebody ON( docprice.id = docpricebody.doc_id ) \n".
-                                                            " GROUP BY docpricebody.product_id \n".
-                                                            ' HAVING max_date <= date("' .$date. '") AND ( docprice.price_type = "'. $priceType .'")' . "\n".
-                                                        ") dp2 ON ( dp1.datetime = dp2.max_date )  \n".
-                                                      ") \n".
-                        " AND docpricebody.product_id = product.id  \n".
-                        " AND docpricebody.doc_id = docprice.id \n".
+                                " SELECT maxd.product_id, db.price \n".
+                                " FROM \n".
+                                    " (SELECT db.product_id, max(d.datetime) max_date \n".
+                                    " FROM docprice d \n".
+                                                        " INNER JOIN docpricebody db ON d.id = db.doc_id \n".
+                                                        ' WHERE d.datetime <= date("' .$date. '") AND d.price_type = "'. $priceType .'"' . "\n".
+                                                        " GROUP BY db.product_id \n".
+                                     ") maxd \n".
+                                    " JOIN docpricebody db ON db.product_id = maxd.product_id \n".
+                                    " JOIN docprice d \n".
+                                            ' ON d.id = db.doc_id AND d.datetime=maxd.max_date AND d.price_type = "'. $priceType .'"' . "\n".
+                            ") price ON price.product_id=p.id \n".
 
-             ") dpb ON ( dpb.product_id = product.id )  \n".
-
-            " LEFT JOIN docpricebody ON( product.id = docpricebody.product_id ) \n".
-            " LEFT JOIN docprice     ON( docprice.id = docpricebody.doc_id  ) \n".
-
-            " WHERE \n".
-            " docpricebody.product_id IS NULL \n".
-            " OR dpb.product_id IS NOT NULL \n"
+            " WHERE price.product_id IS NOT NULL OR NOT EXISTS(SELECT 1 FROM docpricebody db WHERE db.product_id = p.id)"
         ;
 
         return  $params = $this->query($sql);
