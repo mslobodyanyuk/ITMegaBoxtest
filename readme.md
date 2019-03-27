@@ -17,11 +17,16 @@ DocPriceBody - the table of documents contains the list of goods and the price (
 - product_id
 - price
 Project Structure:
-controllers / controller.php- In the file, a function is called from the model and the result is output in view.php
-config / conf.php - contains the connection settings for the database.
-models / price.php - the file contains functions
-views / view.php - output file
-Index.php
+
+`controllers / controller.php` - In the file, a function is called from the model and the result is output in view.php
+
+`config / conf.php` - contains the connection settings for the database.
+
+`models / price.php` - the file contains functions
+
+`views / view.php` - output file
+
+`Index.php`
 
 Note.
 Create several documents with the same product and specify the date between the documents in the request. Also consider the product that has no price. those. not listed in the document, the list should also be displayed.
