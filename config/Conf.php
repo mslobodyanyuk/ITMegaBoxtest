@@ -1,6 +1,5 @@
 <?php
 namespace config;
-
 /*
  * class Conf containing config variables, array variables
  */

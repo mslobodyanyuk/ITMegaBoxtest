@@ -3,6 +3,7 @@ namespace app\models;
 use config;
 use Exception;
 
+
 class Price{
 
     private $host;

@@ -3,7 +3,7 @@
 /*
 * views/view.php - displays the result of the method view of controller
 */
-use app\controllers;
+use app\Controllers;
 header('Content-Type: text/html; charset=utf8');
 
 $params = $controllerParams;
